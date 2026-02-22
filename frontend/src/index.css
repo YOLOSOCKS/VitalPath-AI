@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — keep in sync with src/styles/theme.ts */
+:root {
+  --primary-red: #B91C1C;
+  --primary-red-glow: #ef4444;
+  --primary-red-glow-rgba-15: rgba(239, 68, 68, 0.15);
+  --primary-red-glow-rgba-20: rgba(239, 68, 68, 0.2);
+  --primary-red-glow-rgba-30: rgba(239, 68, 68, 0.3);
+  --primary-red-glow-rgba-45: rgba(239, 68, 68, 0.45);
+  --primary-red-glow-rgba-55: rgba(239, 68, 68, 0.55);
+  --primary-red-glow-rgba-60: rgba(239, 68, 68, 0.6);
+  --primary-red-glow-rgba-08: rgba(239, 68, 68, 0.08);
+  --primary-red-glow-rgba-10: rgba(239, 68, 68, 0.1);
+  --primary-red-glow-rgba-40: rgba(239, 68, 68, 0.4);
+  --primary-red-glow-rgba-90: rgba(239, 68, 68, 0.9);
+  --primary-red-glow-rgba-35: rgba(239, 68, 68, 0.35);
+  --primary-red-glow-rgba-50: rgba(239, 68, 68, 0.5);
+  --primary-red-glow-rgba-25: rgba(239, 68, 68, 0.25);
+  --text-muted-60: rgba(255, 255, 255, 0.6);
+  --welcome-bg-start: #1a0a0a;
+  --welcome-bg-mid: #0a0505;
+  --welcome-bg-end: #000000;
+  --alert-amber: #d97706;
+  --alert-amber-muted: #fcd34d;
+  --alert-amber-rgba-50: rgba(217, 119, 6, 0.5);
+  --alert-amber-rgba-40: rgba(217, 119, 6, 0.4);
+  --alert-amber-rgba-20: rgba(217, 119, 6, 0.2);
+  --alert-amber-rgba-15: rgba(217, 119, 6, 0.15);
+  --alert-amber-bg: rgba(120, 83, 0, 0.22);
+  --standby-bg: rgba(39, 39, 42, 0.5);
+  --standby-border: rgba(255, 255, 255, 0.12);
+  --standby-accent: rgba(239, 68, 68, 0.15);
+  --background-dark: #050505;
+  --panel-glass: rgba(0, 0, 0, 0.4);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #6b7280;
+  --success-green: #34d399;
+  --info-blue: #64748b;
+  --grid-line: #333333;
+  --scrollbar-track: #000000;
+  --scrollbar-thumb: #333333;
+  --glow-soft: 0 0 20px rgba(239, 68, 68, 0.2);
+  --glow-soft-30: 0 0 30px rgba(239, 68, 68, 0.2);
+  --glow-strong: 0 0 40px rgba(239, 68, 68, 0.35);
+  --panel-blur: 12px;
+  --radius-standard: 0.5rem;
+  --radius-large: 0.75rem;
+}
+
+/* App shell: mission-control background + header */
+.app-shell-bg {
+  background-color: #080808;
+  background-image: radial-gradient(ellipse 130% 130% at 50% 50%, #0f0d0d 0%, #0a0808 40%, #060505 75%, #040404 100%);
+}
+.app-shell-vignette {
+  background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 45%, rgba(239, 68, 68, 0.035) 100%);
+}
+.app-shell-header {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  /* border/line color controlled by Tailwind on the element (e.g. border-white/5 or border-amber-500/70 in alert) */
+}
+.app-shell-status-btn {
+  letter-spacing: 0.08em;
+}
+
+/* Glass mission card alert pulse (used by dashboard panels) */
+@keyframes glass-card-pulse {
+  0%, 100% { box-shadow: 0 0 14px var(--alert-amber-rgba-20); }
+  50% { box-shadow: 0 0 22px var(--alert-amber-rgba-20); }
+}
+.glass-mission-card--alert {
+  animation: glass-card-pulse 2.5s ease-in-out infinite;
+}
+
+/* Custom Scrollbar for "Cyberpunk" feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-red-glow);
+}
+
+/* CARGO ALERT — amber highlights, readable on dark (no neon) */
+body.red-alert {
+  --tw-text-opacity: 1;
+}
+body.red-alert #root > div {
+  background: var(--background-dark) !important;
+}
+body.red-alert .text-red-400,
+body.red-alert .text-red-300 {
+  color: var(--alert-amber-muted) !important;
+  text-shadow: 0 0 8px var(--alert-amber-rgba-20);
+}
+body.red-alert .border-red-500\/30,
+body.red-alert .border-red-500\/50,
+body.red-alert .border-white\/10 {
+  border-color: var(--alert-amber-rgba-40) !important;
+  box-shadow: 0 0 12px var(--alert-amber-rgba-15) inset;
+}
+body.red-alert .bg-red-950\/30,
+body.red-alert .bg-red-500\/20 {
+  background-color: var(--alert-amber-bg) !important;
+}
+
+/* ====== WELCOME SCREEN ANIMATIONS ====== */
+
+/* Fingerprint glow pulse */
+.welcome-fingerprint {
+  animation: fingerprintPulse 2.5s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), 0 0 40px rgba(0, 240, 255, 0.05);
+}
+
+.welcome-fingerprint:hover {
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.3), 0 0 60px rgba(0, 240, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.welcome-fingerprint-scanning {
+  animation: fingerprintScan 0.6s ease-in-out infinite !important;
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.4), 0 0 80px rgba(0, 240, 255, 0.2) !important;
+}
+
+.welcome-fingerprint-authenticated {
+  animation: none !important;
+  box-shadow: 0 0 30px rgba(34, 197, 94, 0.4), 0 0 60px rgba(34, 197, 94, 0.2) !important;
+}
+
+@keyframes fingerprintPulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), 0 0 40px rgba(0, 240, 255, 0.05);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.3), 0 0 70px rgba(0, 240, 255, 0.1);
+  }
+}
+
+@keyframes fingerprintScan {
+
+  0%,
+  100% {
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.3), 0 0 60px rgba(0, 240, 255, 0.15);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 50px rgba(0, 240, 255, 0.5), 0 0 100px rgba(0, 240, 255, 0.25);
+    transform: scale(1.08);
+  }
+}
+
+/* Subtle heartbeat / pulse overlay on welcome screen */
+.welcome-heartbeat {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.06;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, var(--primary-red-glow-rgba-15) 0%, transparent 55%);
+  animation: welcomeHeartbeat 2.2s ease-in-out infinite;
+}
+
+@keyframes welcomeHeartbeat {
+  0%, 100% {
+    opacity: 0.04;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.08;
+    transform: scale(1.02);
+  }
+}
+
+/* Scanline sweep with pulse — moves down while opacity/glow pulses */
+.welcome-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 240, 255, 0.5) 50%, transparent 100%);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+  animation: scanlineSweep 4s linear infinite, scanlinePulse 0.8s ease-in-out infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes scanlineSweep {
+  0% {
+    top: -4px;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes scanlinePulse {
+  0%, 100% {
+    opacity: 0.35;
+    box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+    transform: scaleY(0.7);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    transform: scaleY(1.2);
+  }
+}
+
+/* Red theme scanline (welcome screen) */
+.welcome-scanline-red {
+  background: linear-gradient(90deg, transparent 0%, var(--primary-red-glow-rgba-55) 50%, transparent 100%);
+  box-shadow: 0 0 12px var(--primary-red-glow-rgba-45);
+  animation: scanlineSweep 4s linear infinite, scanlinePulseRed 0.8s ease-in-out infinite;
+}
+@keyframes scanlinePulseRed {
+  0%, 100% {
+    opacity: 0.35;
+    box-shadow: 0 0 8px var(--primary-red-glow-rgba-30);
+    transform: scaleY(0.7);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 20px var(--primary-red-glow-rgba-60);
+    transform: scaleY(1.2);
+  }
+}

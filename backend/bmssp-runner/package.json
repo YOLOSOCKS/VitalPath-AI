@@ -1,0 +1,8 @@
+{
+  "name": "vitalpath-ai-bmsssp-runner",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "bm-sssp": "1.0.0"
+  }
+}
